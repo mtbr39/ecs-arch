@@ -1,0 +1,48 @@
+// console $ pug -w ./ -o ./ -P
+- const mochi_num = 3;
+
+doctype html
+html(lang='ja')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        title もちメニュー
+        meta(name='description', content=description)
+        meta(name='keywords', content=keywords)
+
+        link(rel="stylesheet" href="./layout.css")
+
+    body
+        #mochi_menu
+            #blob-loader
+                .menu-bar
+                    for i in [...Array(mochi_num).keys()].map(i => ++i)
+                        - class_name = `position-${i}`
+                        - method_name = `menu_click(${i})`
+                        - bind_name = `{'anime_drop':active_menu==${i}}`
+                        div.mochi(class=class_name 
+                            v-on:click=method_name
+                            v-bind:class=bind_name )
+
+            svg(xmins="http://www.w3.org/2000/svg", version="1.1")
+                defs  
+                    filter#blob
+                        fegaussianblur(in="SourceGraphic" result="blur" stdDeviation="8")
+                        fecolormatrix(in="blur" result="blob" mode="matrix" 
+                            values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 40 -10")
+                
+
+        script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+        script.
+            const mochi_menu = new Vue({
+                el: '#mochi_menu',
+                data: {
+                    active_menu: 0
+                },
+                methods: {
+                    menu_click: function (n) {
+                        this.active_menu = n;
+                        console.log(this.active_menu);
+                    }
+                }
+            })

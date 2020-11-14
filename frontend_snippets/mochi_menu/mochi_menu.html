@@ -1,0 +1,46 @@
+
+<!-- console $ pug -w ./ -o ./ -P--><!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>もちメニュー</title>
+    <meta name="description">
+    <meta name="keywords">
+    <link rel="stylesheet" href="./layout.css">
+  </head>
+  <body>
+    <div id="mochi_menu">
+      <div id="blob-loader">
+        <div class="menu-bar">
+          <div class="mochi position-1" v-on:click="menu_click(1)" v-bind:class="{'anime_drop':active_menu==1}"></div>
+          <div class="mochi position-2" v-on:click="menu_click(2)" v-bind:class="{'anime_drop':active_menu==2}"></div>
+          <div class="mochi position-3" v-on:click="menu_click(3)" v-bind:class="{'anime_drop':active_menu==3}"></div>
+        </div>
+      </div>
+      <svg xmins="http://www.w3.org/2000/svg" version="1.1">
+        <defs> 
+          <filter id="blob">
+            <fegaussianblur in="SourceGraphic" result="blur" stdDeviation="8"></fegaussianblur>
+            <fecolormatrix in="blur" result="blob" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 40 -10"></fecolormatrix>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const mochi_menu = new Vue({
+          el: '#mochi_menu',
+          data: {
+              active_menu: 0
+          },
+          methods: {
+              menu_click: function (n) {
+                  this.active_menu = n;
+                  console.log(this.active_menu);
+              }
+          }
+      })
+    </script>
+  </body>
+</html>

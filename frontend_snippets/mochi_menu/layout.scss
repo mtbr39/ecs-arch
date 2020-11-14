@@ -1,0 +1,70 @@
+$main-color : khaki;
+
+$menu_width: 320px;
+$menu_height: 40px;
+$mochi_num: 3;
+$mochi_r: 60px;
+$margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num} + 1.0) );
+
+
+* {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    body {
+        background: tan;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        font-family: "Open Sans", sans-serif;
+    }
+
+    #blob-loader {
+        overflow: hidden;
+        position: absolute;
+        padding: 64px;
+        text-align: left;
+        width: $menu_width;
+        height: $mochi_r * 2;
+        -webkit-filter: url("#blob");
+        filter: url("#blob");
+    }   
+
+    .menu-bar {
+        position: relative;
+        width: $menu_width;
+        height: $menu_height;
+        background: snow;
+    }
+
+    .mochi {
+        position: absolute;
+        background: snow;
+        top: $menu_height * 1;
+        width: $mochi_r;
+        height: $mochi_r;
+        border-radius: 50%;
+        transition: all 550ms cubic-bezier(0, .74, .2, 1.01);
+    }
+
+
+    @for $i from 1 through $mochi_num {
+        .position-#{$i}{
+            left: calc(#{$margin} + (#{$margin} + #{$mochi_r} ) * (#{$i} - 1));
+        }
+    }
+
+    .anime_drop {
+        top: 40px;
+        animation: drop 0.5s ease 0s 2 alternate both running;
+    }
+
+    @keyframes drop {
+    0% {
+        top: $menu_height * 1;
+    }
+    100% {
+        top: $menu_height * 0.2;
+    }
+}
