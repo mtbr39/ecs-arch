@@ -15,7 +15,9 @@ html(lang='ja')
     body
         #mochi_menu
             #blob-loader
-                .menu-bar
+                .menu-rect(
+                    v-bind:class="{'anime_swell': click_flash}")
+                .menu-block
                     for i in [...Array(mochi_num).keys()].map(i => ++i)
                         .click-box(
                             class=`position-${i}` 
@@ -47,6 +49,9 @@ html(lang='ja')
                 },
                 methods: {
                     menu_click: function (n) {
+                        if(this.on_animation) {
+                            return;
+                        }
                         this.start_click_flash();
                         this.start_anime_timer();
                         this.active_menu = n;
@@ -56,7 +61,7 @@ html(lang='ja')
                         this.click_flash = false;
                         setTimeout(
                             ()=>{ this.click_flash = true;console.log("flash", this.click_flash); },
-                            10
+                            1
                         );
                         
                     },
@@ -66,7 +71,7 @@ html(lang='ja')
                             ()=>{ this.on_animation = false; },
                             this.anime_reqired_time
                         );
-                        console.log("");
+                        console.log("timer");
                     }
                 },
                 computed: {
@@ -80,10 +85,5 @@ html(lang='ja')
                         return array;
                     }
                 },
-                watch: {
-                    number: function(newValue) {
-                    gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue });
-                    }
-                }
+
             })
-            

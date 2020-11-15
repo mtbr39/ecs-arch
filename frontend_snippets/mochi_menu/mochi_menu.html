@@ -12,7 +12,8 @@
   <body>
     <div id="mochi_menu">
       <div id="blob-loader">
-        <div class="menu-bar">
+        <div class="menu-rect" v-bind:class="{'anime_swell': click_flash}"></div>
+        <div class="menu-block">
           <div class="click-box position-1" v-on:click="menu_click(1)"></div>
           <div class="click-box position-2" v-on:click="menu_click(2)"></div>
           <div class="click-box position-3" v-on:click="menu_click(3)"></div>
@@ -44,6 +45,9 @@
           },
           methods: {
               menu_click: function (n) {
+                  if(this.on_animation) {
+                      return;
+                  }
                   this.start_click_flash();
                   this.start_anime_timer();
                   this.active_menu = n;
@@ -53,7 +57,7 @@
                   this.click_flash = false;
                   setTimeout(
                       ()=>{ this.click_flash = true;console.log("flash", this.click_flash); },
-                      10
+                      1
                   );
                   
               },
@@ -63,7 +67,7 @@
                       ()=>{ this.on_animation = false; },
                       this.anime_reqired_time
                   );
-                  console.log("");
+                  console.log("timer");
               }
           },
           computed: {
@@ -77,11 +81,7 @@
                   return array;
               }
           },
-          watch: {
-              number: function(newValue) {
-              gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue });
-              }
-          }
+      
       })
     </script>
   </body>
