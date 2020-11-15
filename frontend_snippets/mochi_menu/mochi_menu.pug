@@ -17,12 +17,11 @@ html(lang='ja')
             #blob-loader
                 .menu-bar
                     for i in [...Array(mochi_num).keys()].map(i => ++i)
-                        - class_name = `position-${i}`
-                        - method_name = `menu_click(${i})`
-                        - bind_name = `{'anime_drop':active_menu==${i}}`
-                        div.mochi(class=class_name 
-                            v-on:click=method_name
-                            v-bind:class=bind_name )
+                        .click-box(
+                            class=`position-${i}` 
+                            v-on:click=`menu_click(${i})` )
+                    .mochi(
+                        v-bind:class="[position_class, {'anime_drop': click_flash}]")
 
             svg(xmins="http://www.w3.org/2000/svg", version="1.1")
                 defs  
@@ -37,12 +36,54 @@ html(lang='ja')
             const mochi_menu = new Vue({
                 el: '#mochi_menu',
                 data: {
-                    active_menu: 0
+                    mochi_num : 3,
+                    active_menu: 1,
+                    click_flash: false,
+                    on_animation: false,
+                    anime_reqired_time: 1000
+                },
+                created: function (n) {
+                    console.log("created.");
                 },
                 methods: {
                     menu_click: function (n) {
+                        this.start_click_flash();
+                        this.start_anime_timer();
                         this.active_menu = n;
-                        console.log(this.active_menu);
+                        console.log("active_menu",this.active_menu);
+                    },
+                    start_click_flash: function () {
+                        this.click_flash = false;
+                        setTimeout(
+                            ()=>{ this.click_flash = true;console.log("flash", this.click_flash); },
+                            10
+                        );
+                        
+                    },
+                    start_anime_timer: function () {
+                        this.on_animation = true;
+                        setTimeout(
+                            ()=>{ this.on_animation = false; },
+                            this.anime_reqired_time
+                        );
+                        console.log("");
+                    }
+                },
+                computed: {
+                    position_class: function() { //2020.11.15やっとできた。この7行に8時間ぐらいかかった。
+                        let array = [];
+                        for (let i=1; i<=this.mochi_num; i++ ){
+                            if(this.active_menu == i){
+                                array.push(`position-${i}`);
+                            }
+                        }
+                        return array;
+                    }
+                },
+                watch: {
+                    number: function(newValue) {
+                    gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue });
                     }
                 }
             })
+            

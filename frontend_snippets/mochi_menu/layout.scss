@@ -38,6 +38,15 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         background: snow;
     }
 
+    .click-box {
+        position: absolute;
+        // background: gray;
+        top: 0px;
+        width: $mochi_r;
+        height: $menu_height;
+        transition: all 550ms cubic-bezier(0, .74, .2, 1.01);
+    }
+
     .mochi {
         position: absolute;
         background: snow;
@@ -45,7 +54,7 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         width: $mochi_r;
         height: $mochi_r;
         border-radius: 50%;
-        transition: all 550ms cubic-bezier(0, .74, .2, 1.01);
+        transition: all 1s ease;
     }
 
 
@@ -65,6 +74,6 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         top: $menu_height * 1;
     }
     100% {
-        top: $menu_height * 0.2;
+        top: $menu_height * 0;
     }
 }
