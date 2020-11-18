@@ -11,9 +11,15 @@ html(lang='ja')
         meta(name='keywords', content=keywords)
 
         link(rel="stylesheet" href="./layout.css")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css")
 
     body
+        i.menu-icon.far.fa-bell
         #mochi_menu
+
+            div(v-for="item in menu_items")
+                | {{ item }}
+
             #blob-loader
                 .menu-rect(
                     v-bind:class="{'anime_swell': click_flash}")
@@ -39,6 +45,17 @@ html(lang='ja')
                 el: '#mochi_menu',
                 data: {
                     mochi_num : 3,
+                    menu_items : {
+                        item1: {
+                            fa_icon: "fa-square"
+                        },
+                        item2: {
+                            fa_icon: "fa-bell"
+                        },
+                        item3: {    
+                            fa_icon: "fa-bookmark"
+                        }
+                    },
                     active_menu: 1,
                     click_flash: false,
                     on_animation: false,

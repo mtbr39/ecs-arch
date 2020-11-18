@@ -11,7 +11,7 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-#blob-loader {
+#blob-loader:not(.menu-icon) {
   overflow: hidden;
   position: relative;
   margin: auto;

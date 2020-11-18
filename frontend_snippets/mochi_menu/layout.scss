@@ -20,7 +20,7 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         font-family: "Open Sans", sans-serif;
     }
 
-    #blob-loader {
+    #blob-loader:not(.menu-icon) {
         overflow: hidden;
         position: relative;
         margin: auto;
@@ -30,7 +30,7 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         height: $mochi_r * 2;
         -webkit-filter: url("#blob");
         filter: url("#blob");
-    }   
+    }
 
     .menu-block {
         position: relative;
@@ -39,6 +39,9 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         transform: translate(-50%, -50%);
         width: $menu_width;
         height: $menu_height;
+    }
+    .menu-icon {
+        
     }
     .menu-rect {
         position: absolute;
