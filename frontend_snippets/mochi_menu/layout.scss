@@ -20,7 +20,7 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         font-family: "Open Sans", sans-serif;
     }
 
-    #blob-loader:not(.menu-icon) {
+    #blob-loader {
         overflow: hidden;
         position: relative;
         margin: auto;

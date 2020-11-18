@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="./layout.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
   </head>
-  <body><i class="menu-icon far fa-bell"></i>
+  <body>
     <div id="mochi_menu">
-      <div v-for="item in menu_items">{{ item }}</div>
+      <div v-for="item in menu_items"><i class="menu-icon far" v-bind:class="item.classname"></i></div>
       <div id="blob-loader">
         <div class="menu-rect" v-bind:class="{'anime_swell': click_flash}"></div>
         <div class="menu-block">
@@ -37,17 +37,17 @@
           el: '#mochi_menu',
           data: {
               mochi_num : 3,
-              menu_items : {
-                  item1: {
-                      fa_icon: "fa-square"
+              menu_items : [
+                  {
+                      classname: {"fa-square": true}
                   },
-                  item2: {
-                      fa_icon: "fa-bell"
+                  {
+                      classname: {"fa-bell": true}
                   },
-                  item3: {    
-                      fa_icon: "fa-bookmark"
+                  {    
+                      classname: {"fa-bookmark": true}
                   }
-              },
+              ],
               active_menu: 1,
               click_flash: false,
               on_animation: false,
@@ -84,7 +84,7 @@
               }
           },
           computed: {
-              position_class: function() { //2020.11.15やっとできた。この7行に8時間ぐらいかかった。
+              position_class: function() {
                   let array = [];
                   for (let i=1; i<=this.mochi_num; i++ ){
                       if(this.active_menu == i){
