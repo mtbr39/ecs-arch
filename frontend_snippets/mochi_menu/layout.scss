@@ -41,7 +41,7 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         height: $menu_height;
     }
     .menu-icon {
-        
+        color: snow;
     }
     .menu-rect {
         position: absolute;

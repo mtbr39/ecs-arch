@@ -33,6 +33,10 @@ body {
   height: 40px;
 }
 
+.menu-icon {
+  color: snow;
+}
+
 .menu-rect {
   position: absolute;
   top: 50%;

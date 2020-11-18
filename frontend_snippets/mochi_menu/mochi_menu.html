@@ -16,9 +16,9 @@
       <div id="blob-loader">
         <div class="menu-rect" v-bind:class="{'anime_swell': click_flash}"></div>
         <div class="menu-block">
-          <div class="click-box position-1" v-on:click="menu_click(1)"></div>
-          <div class="click-box position-2" v-on:click="menu_click(2)"></div>
-          <div class="click-box position-3" v-on:click="menu_click(3)"></div>
+          <div v-for="(item, index) in menu_items">
+            <div class="click-box" v-bind:class="`position-${index+1}`" v-on:click="menu_click(index+1)"></div>
+          </div>
           <div class="mochi" v-bind:class="[position_class, {'anime_drop': click_flash}]"></div>
         </div>
       </div>
@@ -36,7 +36,6 @@
       const mochi_menu = new Vue({
           el: '#mochi_menu',
           data: {
-              mochi_num : 3,
               menu_items : [
                   {
                       classname: {"fa-square": true}
@@ -64,12 +63,12 @@
                   this.start_click_flash();
                   this.start_anime_timer();
                   this.active_menu = n;
-                  console.log("active_menu",this.active_menu);
+                  console.log("[active_menu] = ",this.active_menu);
               },
               start_click_flash: function () {
                   this.click_flash = false;
                   setTimeout(
-                      ()=>{ this.click_flash = true;console.log("flash", this.click_flash); },
+                      ()=>{ this.click_flash = true;},
                       1
                   );
                   
@@ -77,16 +76,19 @@
               start_anime_timer: function () {
                   this.on_animation = true;
                   setTimeout(
-                      ()=>{ this.on_animation = false; },
+                      ()=>{ 
+                          this.on_animation = false;
+                          console.log("stop anime timer");
+                      },
                       this.anime_reqired_time
                   );
-                  console.log("timer");
+                  console.log("start anime timer");
               }
           },
           computed: {
               position_class: function() {
                   let array = [];
-                  for (let i=1; i<=this.mochi_num; i++ ){
+                  for (let i=1; i<=this.menu_items.length; i++ ){
                       if(this.active_menu == i){
                           array.push(`position-${i}`);
                       }
