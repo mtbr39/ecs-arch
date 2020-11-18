@@ -14,22 +14,25 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
 
     body {
         background: tan;
-        text-align: center;
         width: 100%;
         height: 100%;
-        font-family: "Open Sans", sans-serif;
+    }
+
+    #mochi_menu {
+        margin: auto;
+        
     }
 
     #blob-loader {
         overflow: hidden;
         position: relative;
-        margin: auto;
-        padding: 64px;
-        text-align: left;
-        width: $menu_width;
-        height: $mochi_r * 2;
         -webkit-filter: url("#blob");
         filter: url("#blob");
+    }
+    .menu-size-wrapper {
+        padding: 64px;
+        width: $menu_width;
+        height: $menu_height * 2;
     }
 
     .menu-block {
@@ -40,8 +43,18 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
         width: $menu_width;
         height: $menu_height;
     }
+    .menu-icon-layer {
+        position: absolute;
+        z-index: 1;
+    }
     .menu-icon {
-        color: snow;
+        position: absolute;
+        z-index: 1;
+        top: $menu_height/2;
+        left: $mochi_r/2;
+        transform: translate(-50%, -50%);
+        color: tan;
+        
     }
     .menu-rect {
         position: absolute;
@@ -79,11 +92,11 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
 
     .click-box {
         position: absolute;
-        // background: gray;
+        border: gray solid 1px;
+        z-index: 3;
         top: 0px;
         width: $mochi_r;
         height: $menu_height;
-        transition: all 550ms cubic-bezier(0, .74, .2, 1.01);
     }
 
     .mochi {

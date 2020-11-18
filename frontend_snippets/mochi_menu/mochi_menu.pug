@@ -14,16 +14,16 @@ html(lang='ja')
 
     body
         #mochi_menu
-            div(v-for="item in menu_items")
-                i.menu-icon.far(v-bind:class="item.classname")
-            #blob-loader
+            .menu-icon-layer.menu-size-wrapper
+                .menu-block
+                    div(v-for="(item, index) in menu_items" style="position:relative;"
+                    v-bind:class="`position-${index+1}`")
+                        .click-box(v-on:click=`menu_click(index+1)`)
+                        i.menu-icon(v-bind:class="item.classname")
+            #blob-loader.menu-size-wrapper
                 .menu-rect(
                     v-bind:class="{'anime_swell': click_flash}")
                 .menu-block
-                    div(v-for="(item, index) in menu_items")
-                        .click-box(
-                            v-bind:class="`position-${index+1}`" 
-                            v-on:click=`menu_click(index+1)`)
                     .mochi(
                         v-bind:class="[position_class, {'anime_drop': click_flash}]")
 
@@ -42,13 +42,13 @@ html(lang='ja')
                 data: {
                     menu_items : [
                         {
-                            classname: {"fa-square": true}
+                            classname: {"fas fa-home": true}
                         },
                         {
-                            classname: {"fa-bell": true}
+                            classname: {"far fa-bell": true}
                         },
                         {    
-                            classname: {"fa-bookmark": true}
+                            classname: {"far fa-bookmark": true}
                         }
                     ],
                     active_menu: 1,
