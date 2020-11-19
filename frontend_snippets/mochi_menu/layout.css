@@ -72,11 +72,9 @@ body {
   background: snow;
 }
 
-.anime_swell {
-  width: 320px;
-  height: 40px;
-  -webkit-animation: swell 1s ease 0s 1 alternate both running;
-          animation: swell 1s ease 0s 1 alternate both running;
+.swell_normal {
+  -webkit-animation: swell 0.5s ease-out 0s 2 alternate both running;
+          animation: swell 0.5s ease-out 0s 2 alternate both running;
 }
 
 @-webkit-keyframes swell {
@@ -84,13 +82,9 @@ body {
     width: 320px;
     height: 40px;
   }
-  50% {
+  100% {
     width: 328px;
     height: 48px;
-  }
-  100% {
-    width: 320px;
-    height: 40px;
   }
 }
 
@@ -99,13 +93,63 @@ body {
     width: 320px;
     height: 40px;
   }
-  50% {
+  100% {
+    width: 328px;
+    height: 48px;
+  }
+}
+
+.swell_0_to_X {
+  -webkit-animation: swell_0_to_X 1s ease-out 0s 1 alternate both running;
+          animation: swell_0_to_X 1s ease-out 0s 1 alternate both running;
+}
+
+@-webkit-keyframes swell_0_to_X {
+  0% {
     width: 328px;
     height: 48px;
   }
   100% {
     width: 320px;
     height: 40px;
+  }
+}
+
+@keyframes swell_0_to_X {
+  0% {
+    width: 328px;
+    height: 48px;
+  }
+  100% {
+    width: 320px;
+    height: 40px;
+  }
+}
+
+.swell_X_to_0 {
+  -webkit-animation: swell_X_to_0 1s ease-out 0s 1 alternate both running;
+          animation: swell_X_to_0 1s ease-out 0s 1 alternate both running;
+}
+
+@-webkit-keyframes swell_X_to_0 {
+  0% {
+    width: 320px;
+    height: 40px;
+  }
+  100% {
+    width: 328px;
+    height: 48px;
+  }
+}
+
+@keyframes swell_X_to_0 {
+  0% {
+    width: 320px;
+    height: 40px;
+  }
+  100% {
+    width: 328px;
+    height: 48px;
   }
 }
 
@@ -115,6 +159,11 @@ body {
   top: 0px;
   width: 60px;
   height: 40px;
+  cursor: pointer;
+}
+
+.click-box-drop {
+  height: 100px;
 }
 
 .mochi {
@@ -124,6 +173,7 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  cursor: pointer;
   -webkit-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
 }
@@ -140,10 +190,12 @@ body {
   left: calc(calc( ( 320px - 60px * 3 ) / (3 + 1.0)) + (calc( ( 320px - 60px * 3 ) / (3 + 1.0)) + 60px ) * (3 - 1));
 }
 
-.anime_drop {
+.drop_normal {
   top: 40px;
-  -webkit-animation: drop 1s ease-in-out 0s 1 alternate both running;
-          animation: drop 1s ease-in-out 0s 1 alternate both running;
+  -webkit-animation: drop 1s ease-in-out 0s 1 alternate none running;
+          animation: drop 1s ease-in-out 0s 1 alternate none running;
+  -webkit-transition: all 1s ease-in;
+  transition: all 1s ease-in;
 }
 
 @-webkit-keyframes drop {
@@ -167,6 +219,53 @@ body {
   }
   100% {
     top: 40px;
+  }
+}
+
+.drop_0_to_X {
+  -webkit-animation: drop_0_to_X 1s ease-in-out 0s 1 alternate both running;
+          animation: drop_0_to_X 1s ease-in-out 0s 1 alternate both running;
+}
+
+@-webkit-keyframes drop_0_to_X {
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: 40px;
+  }
+}
+
+@keyframes drop_0_to_X {
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: 40px;
+  }
+}
+
+.drop_X_to_0 {
+  top: 0px;
+  -webkit-animation: drop_X_to_0 1s ease-in-out 0s 1 alternate both running;
+          animation: drop_X_to_0 1s ease-in-out 0s 1 alternate both running;
+}
+
+@-webkit-keyframes drop_X_to_0 {
+  0% {
+    top: 40px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes drop_X_to_0 {
+  0% {
+    top: 40px;
+  }
+  100% {
+    top: 0px;
   }
 }
 /*# sourceMappingURL=layout.css.map */
