@@ -16,16 +16,18 @@ html(lang='ja')
         #mochi_menu
             .menu-icon-layer.menu-size-wrapper
                 .menu-block
-                    div(v-for="(item, index) in menu_items" style="position:relative;"
-                    v-bind:class="`position-${index+1}`")
+                    div(v-for="(item, index) in menu_items" 
+                        style="position:relative;"
+                        v-bind:class="`position-${index+1}`")
                         .click-box(v-on:click=`menu_click(index+1)`)
-                        i.menu-icon(v-bind:class="item.classname")
+                        i.menu-icon(
+                            v-bind:class="[item.classname, {'menu-icon-drop': active_menu==index+1}]")
             #blob-loader.menu-size-wrapper
                 .menu-rect(
                     v-bind:class="{'anime_swell': click_flash}")
                 .menu-block
                     .mochi(
-                        v-bind:class="[position_class, {'anime_drop': click_flash}]")
+                        v-bind:class="[position_class, mochi_vertical_class]")
 
             svg(xmins="http://www.w3.org/2000/svg", version="1.1")
                 defs  
@@ -56,11 +58,8 @@ html(lang='ja')
                     on_animation: false,
                     anime_reqired_time: 1000
                 },
-                created: function (n) {
-                    console.log("created.");
-                },
                 methods: {
-                    menu_click: function (n) {
+                    menu_click(n) {
                         if(this.on_animation) {
                             return;
                         }
@@ -69,7 +68,7 @@ html(lang='ja')
                         this.active_menu = n;
                         console.log("[active_menu] = ",this.active_menu);
                     },
-                    start_click_flash: function () {
+                    start_click_flash() {
                         this.click_flash = false;
                         setTimeout(
                             ()=>{ this.click_flash = true;},
@@ -77,7 +76,7 @@ html(lang='ja')
                         );
                         
                     },
-                    start_anime_timer: function () {
+                    start_anime_timer() {
                         this.on_animation = true;
                         setTimeout(
                             ()=>{ 
@@ -90,13 +89,13 @@ html(lang='ja')
                     }
                 },
                 computed: {
-                    position_class: function() {
-                        let array = [];
-                        for (let i=1; i<=this.menu_items.length; i++ ){
-                            if(this.active_menu == i){
-                                array.push(`position-${i}`);
-                            }
-                        }
+                    position_class() {
+                        return `position-${this.active_menu}`;
+                    },
+                    mochi_vertical_class() {
+                        console.log("mochiV");
+                        let array = []
+                        if(this.click_flash) array.push('anime_drop');
                         return array;
                     }
                 },

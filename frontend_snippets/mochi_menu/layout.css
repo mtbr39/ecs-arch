@@ -49,6 +49,16 @@ body {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   color: tan;
+  font-size: 18px;
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}
+
+.menu-icon-drop {
+  top: 70px;
+  font-size: 24px;
+  -webkit-transition: all 1s ease-in;
+  transition: all 1s ease-in;
 }
 
 .menu-rect {
@@ -101,7 +111,6 @@ body {
 
 .click-box {
   position: absolute;
-  border: gray solid 1px;
   z-index: 3;
   top: 0px;
   width: 60px;
@@ -115,8 +124,8 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  -webkit-transition: all 1s ease;
-  transition: all 1s ease;
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .position-1 {
@@ -133,8 +142,8 @@ body {
 
 .anime_drop {
   top: 40px;
-  -webkit-animation: drop 1s ease 0s 1 alternate both running;
-          animation: drop 1s ease 0s 1 alternate both running;
+  -webkit-animation: drop 1s ease-in-out 0s 1 alternate both running;
+          animation: drop 1s ease-in-out 0s 1 alternate both running;
 }
 
 @-webkit-keyframes drop {
