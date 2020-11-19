@@ -25,7 +25,7 @@ body {
 
     #blob-loader {
         overflow: hidden;
-        position: relative;
+        position: absolute;
         -webkit-filter: url("#blob");
         filter: url("#blob");
     }
@@ -43,7 +43,13 @@ body {
         width: $menu_width;
         height: $menu_height;
     }
-    .menu-icon-layer {
+    .menu-icon-layer-wrapper {
+        position: relative;
+        margin: auto;
+        width: $menu_width + 128px;
+        height: $menu_height * 2 + 128px;
+    }
+    #menu-icon-layer {
         position: absolute;
         z-index: 1;
     }
@@ -183,4 +189,13 @@ body {
             top: $menu_height * 0;
         }
     }
-    
+
+    #content-wrapper {
+        margin: 30px auto;
+        padding: 30px;
+        width: 280px;
+        height: 280px;
+        background-color: snow;
+        border-radius: 20%;
+    }
+

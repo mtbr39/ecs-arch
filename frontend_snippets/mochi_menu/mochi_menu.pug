@@ -14,8 +14,8 @@ html(lang='ja')
 
     body
         #mochi_menu
-            .menu-icon-layer.menu-size-wrapper
-                .menu-block
+            .menu-icon-layer-wrapper
+                #menu-icon-layer.menu-block
                     div(v-for="(item, index) in menu_items" 
                         style="position:relative;"
                         v-bind:class="`position-${index+1}`")
@@ -23,12 +23,15 @@ html(lang='ja')
                                     v-bind:class="{'click-box-drop': active_menu==index+1}")
                         i.menu-icon(
                             v-bind:class="[item.classname, {'menu-icon-drop': active_menu==index+1}]")
-            #blob-loader.menu-size-wrapper
-                .menu-rect(
-                    v-bind:class="rect_swell_class")
-                .menu-block
-                    .mochi(
-                        v-bind:class="[position_class, mochi_vertical_class]")
+                #blob-loader.menu-size-wrapper
+                    .menu-rect(
+                        v-bind:class="rect_swell_class")
+                    .menu-block
+                        .mochi(
+                            v-bind:class="[position_class, mochi_vertical_class]")
+
+            #content-wrapper
+
 
             svg(xmins="http://www.w3.org/2000/svg", version="1.1")
                 defs  

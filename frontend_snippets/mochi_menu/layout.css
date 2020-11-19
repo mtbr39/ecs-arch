@@ -15,7 +15,7 @@ body {
 
 #blob-loader {
   overflow: hidden;
-  position: relative;
+  position: absolute;
   -webkit-filter: url("#blob");
   filter: url("#blob");
 }
@@ -36,7 +36,14 @@ body {
   height: 40px;
 }
 
-.menu-icon-layer {
+.menu-icon-layer-wrapper {
+  position: relative;
+  margin: auto;
+  width: 448px;
+  height: 208px;
+}
+
+#menu-icon-layer {
   position: absolute;
   z-index: 1;
 }
@@ -267,5 +274,14 @@ body {
   100% {
     top: 0px;
   }
+}
+
+#content-wrapper {
+  margin: 30px auto;
+  padding: 30px;
+  width: 280px;
+  height: 280px;
+  background-color: snow;
+  border-radius: 20%;
 }
 /*# sourceMappingURL=layout.css.map */
