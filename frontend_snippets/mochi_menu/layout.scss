@@ -14,8 +14,8 @@ $margin: calc( ( #{$menu_width} - #{$mochi_r} * #{$mochi_num} ) / (#{$mochi_num}
 
 body {
     background: tan;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
     #mochi_menu {
@@ -23,11 +23,11 @@ body {
         
     }
 
-    #blob-loader {
+    #blur-layer {
         overflow: hidden;
         position: absolute;
-        -webkit-filter: url("#blob");
-        filter: url("#blob");
+        -webkit-filter: url("#blur");
+        filter: url("#blur");
     }
     .menu-size-wrapper {
         padding: 64px;
@@ -43,7 +43,7 @@ body {
         width: $menu_width;
         height: $menu_height;
     }
-    .menu-icon-layer-wrapper {
+    .menu-relative {
         position: relative;
         margin: auto;
         width: $menu_width + 128px;
@@ -197,5 +197,25 @@ body {
         height: 280px;
         background-color: snow;
         border-radius: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .content-icon {
+        display: inline-block;
+        color: tan;
+    }
+    .content-icon i {
+        opacity: 0.5;
+        font-size: 64px;
+        animation: blink 1.5s ease-in-out 0s infinite alternate both running;
+    }
+    @keyframes blink {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 0.5;
+        }
     }
 
