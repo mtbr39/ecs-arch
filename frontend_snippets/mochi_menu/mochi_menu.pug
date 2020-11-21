@@ -21,8 +21,7 @@ html(lang='ja')
                         v-bind:class="`position-${index+1}`")
                         .click-box( v-on:click=`menu_click(index+1)`
                                     v-bind:class="{'click-box-drop': active_menu==index+1}")
-                        i.menu-icon(
-                            v-bind:class="[item.classname, {'menu-icon-drop': active_menu==index+1}]")
+                        i.menu-icon(v-bind:class="[item.classname, {'menu-icon-drop': active_menu==index+1}]")
                 #blur-layer.menu-size-wrapper
                     .menu-rect(
                         v-bind:class="rect_swell_class")
@@ -48,15 +47,9 @@ html(lang='ja')
                 el: '#mochi_menu',
                 data: {
                     menu_items : [
-                        {
-                            classname: {"fas fa-home": true}
-                        },
-                        {
-                            classname: {"far fa-bell": true}
-                        },
-                        {    
-                            classname: {"far fa-bookmark": true}
-                        }
+                        { classname: {"fas fa-home": true} },
+                        { classname: {"far fa-bell": true} },
+                        { classname: {"far fa-bookmark": true} }
                     ],
                     active_menu: 0,
                     pre_active_menu: 2,
@@ -98,6 +91,16 @@ html(lang='ja')
                             this.anime_reqired_time
                         );
                         console.log("start anime timer");
+                    },
+                    anime_state(class_names) {
+                        let str = ''
+                        if(this.active_menu==0 && this.pre_active_menu!=0) 
+                            str=class_names.zero_to_x;
+                        else if(this.pre_active_menu==0) 
+                            str=class_names.x_to_zero;
+                        else if(this.click_flash) 
+                            str=class_names.normal;
+                        return str;
                     }
                 },
                 computed: {
@@ -111,19 +114,20 @@ html(lang='ja')
                         return `position-${num}`;
                     },
                     mochi_vertical_class() {
-                        console.log("mochiV");
-                        let str = ''
-                        if(this.active_menu==0 && this.pre_active_menu!=0) str='drop_X_to_0';
-                        else if(this.pre_active_menu==0) str='drop_0_to_X';
-                        else if(this.click_flash) str='drop_normal';
-                        return str;
+                        const class_names = {
+                            zero_to_x: 'drop_X_to_0', 
+                            x_to_zero: 'drop_0_to_X' ,
+                            normal: 'drop_normal'
+                        };
+                        return this.anime_state(class_names);
                     },
                     rect_swell_class() {
-                        let str = '';
-                        if(this.active_menu==0 && this.pre_active_menu!=0) str='swell_X_to_0';
-                        else if(this.pre_active_menu==0) str='swell_0_to_X';
-                        else if(this.click_flash) str='swell_normal'
-                        return str;
+                        const class_names = {
+                            zero_to_x: 'swell_X_to_0', 
+                            x_to_zero: 'swell_normal',
+                            normal: 'swell_normal'
+                        };
+                        return this.anime_state(class_names);
                     }
                 },
 
