@@ -76,6 +76,14 @@ export function convertPathToCenterPoints(path: Point[], gridSize: number): Poin
     }));
 }
 
+export function convertPointToCenterPoint(point: Point, gridSize: number): Point {
+    const halfGridSize = gridSize / 2;
+    return {
+        x: (point.x * gridSize) + halfGridSize,
+        y: (point.y * gridSize) + halfGridSize,
+    };
+}
+
 export function findAndConvertPath(map: number[][], start: Point, goal: Point, gridSize: number): Point[] | null {
     const path = findPath(map, start, goal); // 最初の関数で経路を見つける
     if (!path) {
@@ -84,4 +92,38 @@ export function findAndConvertPath(map: number[][], start: Point, goal: Point, g
 
     const centerPath = convertPathToCenterPoints(path, gridSize); // 2番目の関数でマスの中心に変換する
     return centerPath;
+}
+
+export function convertPointToGridPosition(point: Point, gridSize: number): Point {
+    return {
+        x: Math.floor(point.x / gridSize),
+        y: Math.floor(point.y / gridSize),
+    };
+}
+
+export function getRandomEmptyGridPosition(mapGrid: number[][]): Point | null {
+    const emptyPositions: Point[] = [];
+
+    for (let i = 0; i < mapGrid.length; i++) {
+        for (let j = 0; j < mapGrid[i].length; j++) {
+            if (mapGrid[i][j] === 0) {
+                emptyPositions.push({ x: j, y: i });
+            }
+        }
+    }
+
+    if (emptyPositions.length === 0) {
+        // マップ上に空きがない場合はnullを返す
+        return null;
+    }
+
+    // 空き位置からランダムに1つ選ぶ
+    const randomIndex = Math.floor(Math.random() * emptyPositions.length);
+    return emptyPositions[randomIndex];
+}
+
+export function getRandomEmptyPoint(mapGrid: number[][], gridSize: number): Point | null {
+    const position = getRandomEmptyGridPosition(mapGrid);
+    if(position == null) return null;
+    return convertPointToCenterPoint(position, gridSize);
 }

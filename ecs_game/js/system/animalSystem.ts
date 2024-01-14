@@ -1,7 +1,7 @@
 import { AnimalComponent, Component, MapComponent, PathfindComponent, PositionComponent, VelocityComponent } from "../component/component";
 import { Entity } from "../entity";
 import { createPointEntity } from "../makeEntity";
-import { findAndConvertPath } from "../library/pathfind";
+import { findAndConvertPath, convertPointToGridPosition, getRandomEmptyGridPosition } from "../library/pathfind";
 import { System, UtilitySystem } from "./system";
 
 export class AnimalSystem extends System {
@@ -42,22 +42,34 @@ export class AnimalSystem extends System {
                         velocity.speedY = 0;
                         break;
                     case "pathfindStart":
-                        // const start: Point = { x: 1, y: 1 };
-                        // const goal: Point = { x: 37, y: 37 };
-                        const start: Point = map.centers[0];
-                        const goal: Point = map.centers[2];
                         const mapCellGridSize = 10;
-                        const finalResult = findAndConvertPath(map.grid, start, goal, mapCellGridSize);
-                        if (finalResult !== null) {
-                            pathfind.path = finalResult!;
-
-                            pathfind.path.forEach((path) => {
-                                // this.entities.push(createPointEntity(path.x, path.y)) ;
-                            });
+                        
+                        const start: Point = convertPointToGridPosition(position, mapCellGridSize);
+                        const goal: Point | null = getRandomEmptyGridPosition(map.grid);
+                        
+                        if (goal !== null) {
+                            const finalResult = findAndConvertPath(map.grid, start, goal, mapCellGridSize);
+                            if (finalResult !== null) {
+                                pathfind.path = finalResult!;
+    
+                                pathfind.path.forEach((path) => {
+                                    // this.entities.push(createPointEntity(path.x, path.y)) ; // Pathにしるしをつけるデバッグ
+                                });
+                            } else {
+                                console.log("finalResultがnullです");
+                            }
+                        } else {
+                            console.log("goalがnullです");
                         }
+
                         animal.state = "pathfinding";
                         break;
                     case "pathfinding":
+
+                        if (pathfind.path.length === 0 || pathfind.achievement >= pathfind.path.length) {
+                            pathfind.achievement = 0;
+                            animal.state = "pathfindStart";
+                        }
 
                         break;
                     default:

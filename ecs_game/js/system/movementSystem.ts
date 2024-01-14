@@ -46,7 +46,7 @@ export class MovementSystem extends System {
         const distanceToNextPoint = Math.sqrt(Math.pow(nextPoint.x - currentPos.x, 2) + Math.pow(nextPoint.y - currentPos.y, 2));
 
         if (distanceToNextPoint <= proximityThreshold) {
-            console.log("到着", pathfind, pathfind.achievement);
+            // console.log("到着", pathfind, pathfind.achievement);
             pathfind.achievement++;
 
             if (pathfind.achievement >= pathfind.path.length) {

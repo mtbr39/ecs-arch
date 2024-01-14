@@ -18,7 +18,7 @@ export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
         })
     );
 
-    entities.push(...createSurroundingBlocks(100,100,150,150, 2));
+    // entities.push(...createSurroundingBlocks(100,100,150,150, 2));
 
     const mapEntity = createMap();
     entities.push(mapEntity);
@@ -26,7 +26,9 @@ export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
     // entities.push(...createMapBlock(mapComponent.grid));
 
     const animalInitPoint = MapGenerator.convertPointToCenterPoint(mapComponent.centers[0], 10);
-    entities.push(createAnimalEntity(animalInitPoint));
+    for (let i = 0; i < 50; i++) {
+        entities.push(createAnimalEntity(animalInitPoint));
+    }
 
 }
 
