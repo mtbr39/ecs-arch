@@ -1,6 +1,6 @@
 import { Entity } from "../entity";
 import { System } from "./system";
-import { MapComponent, PointComponent, PositionComponent, ShapeComponent, SizeComponent } from "../component/component";
+import { LabelComponent, MapComponent, PointComponent, PositionComponent, ShapeComponent, SizeComponent } from "../component/component";
 
 export class RenderSystem extends System {
     private ctx: CanvasRenderingContext2D;
@@ -48,7 +48,7 @@ export class RenderSystem extends System {
                         if (map.grid[y][x] === 0) {
                             const rectX = x * mapCellGridSize; // x 座標の計算
                             const rectY = y * mapCellGridSize; // y 座標の計算
-                            this.ctx.fillStyle = "#4D6653";
+                            this.ctx.fillStyle = "#E6E6E6";
                             this.rect(rectX, rectY, mapCellGridSize, mapCellGridSize, true, true);
                         }
                     }
@@ -61,6 +61,7 @@ export class RenderSystem extends System {
             const size = entity.components.SizeComponent as SizeComponent;
             const point = entity.components.PointComponent as PointComponent;
             const shape = entity.components.ShapeComponent as ShapeComponent;
+            const label = entity.components.LabelComponent as LabelComponent;
 
             if (position && size && shape === null) {
                 // shapeが無い場合
@@ -79,6 +80,11 @@ export class RenderSystem extends System {
                         break;
                 }
             }
+            if (position && size && label) {
+                const labelX = position.x + size.width / 2; // テキストのX座標を計算
+                const labelY = position.y - 5; // テキストのY座標を計算（適宜調整）
+                this.text(label.name, "black", labelX, labelY, "24px");
+            }
         });
     }
 
@@ -94,7 +100,7 @@ export class RenderSystem extends System {
 
     circle(_x: number, _y: number, _radius: number, _isFill: boolean = true) {
         const [x, y] = this.scaler.array([_x, _y]);
-        const radius = this.scaler.scale(_radius);
+        const radius = this.scaler.value(_radius);
 
         this.ctx.beginPath();
         this.ctx.arc(x, y, radius, 0, Math.PI * 2); // 円を描画するパスを設定
@@ -114,5 +120,13 @@ export class RenderSystem extends System {
         this.ctx.moveTo(startX, startY);
         this.ctx.lineTo(endX, endY);
         this.ctx.stroke();
+    }
+
+    text(_text: string, _color: string, _positionX: number, _positionY: number, _fontSize: string = "12px", _fontFamily:string = "Serif"): void {
+        const [positionX, positionY] = this.scaler.array([_positionX, _positionY]); // 座標をスケール
+        this.ctx.fillStyle = _color; // テキストカラーを引数で指定
+        this.ctx.font = _fontSize + " " + _fontFamily; // フォントとサイズを引数で指定
+        this.ctx.textAlign = "center";
+        this.ctx.fillText(_text, positionX, positionY);
     }
 }

@@ -88,3 +88,10 @@ export class MapComponent extends Component {
         super();
     }
 }
+
+export class LabelComponent extends Component {
+    constructor(public name: string) {
+        super();
+    }
+}
+

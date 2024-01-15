@@ -1,8 +1,9 @@
 import { createButton } from "./library/UIManager";
-import { AnimalComponent, ColliderComponent, MapComponent, PathfindComponent, PlayerComponent, PointComponent, PositionComponent, ShapeComponent, SizeComponent, VelocityComponent } from "./component/component";
+import { AnimalComponent, ColliderComponent, LabelComponent, MapComponent, PathfindComponent, PlayerComponent, PointComponent, PositionComponent, ShapeComponent, SizeComponent, VelocityComponent } from "./component/component";
 import { Entity } from "./entity";
 import { MapGenerator } from "./library/mapGenerator";
 import { convertPathToCenterPoints } from "./library/pathfind";
+import { generateRandomName } from "./library/randomString";
 
 export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
 
@@ -26,7 +27,7 @@ export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
     // entities.push(...createMapBlock(mapComponent.grid));
 
     const animalInitPoint = MapGenerator.convertPointToCenterPoint(mapComponent.centers[0], 10);
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
         entities.push(createAnimalEntity(animalInitPoint));
     }
 
@@ -94,9 +95,10 @@ function createAnimalEntity(initPoint: Point) {
     animal.components.SizeComponent = new SizeComponent(2, 2);
     animal.components.VelocityComponent = new VelocityComponent(0, 0);
     animal.components.ColliderComponent = new ColliderComponent("animal", ['block']);
-    animal.components.ShapeComponent = new ShapeComponent('square', 'black');
+    animal.components.ShapeComponent = new ShapeComponent('circle', 'black');
     animal.components.AnimalComponent = new AnimalComponent();
     animal.components.PathfindComponent = new PathfindComponent();
+    animal.components.LabelComponent = new LabelComponent(generateRandomName());
     return animal;
 }
 
