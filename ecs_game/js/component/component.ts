@@ -90,7 +90,7 @@ export class MapComponent extends Component {
 }
 
 export class LabelComponent extends Component {
-    constructor(public name: string) {
+    constructor(public name: string, public color: string = "black") {
         super();
     }
 }

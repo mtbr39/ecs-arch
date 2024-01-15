@@ -3,7 +3,7 @@ import { AnimalComponent, ColliderComponent, LabelComponent, MapComponent, Pathf
 import { Entity } from "./entity";
 import { MapGenerator } from "./library/mapGenerator";
 import { convertPathToCenterPoints } from "./library/pathfind";
-import { generateRandomName } from "./library/randomString";
+import { generateRandomName, generateRandomJapaneseLastName } from "./library/randomString";
 
 export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
 
@@ -27,8 +27,11 @@ export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
     // entities.push(...createMapBlock(mapComponent.grid));
 
     const animalInitPoint = MapGenerator.convertPointToCenterPoint(mapComponent.centers[0], 10);
-    for (let i = 0; i < 20; i++) {
-        entities.push(createAnimalEntity(animalInitPoint));
+    const animalLength = 100;
+    for (let i = 0; i <= animalLength; i++) {
+        let color = "black";
+        if (i == animalLength) color = "#FF3900";
+        entities.push(createAnimalEntity(animalInitPoint, color));
     }
 
 }
@@ -89,16 +92,16 @@ const surroundingBlocks = createSurroundingBlocks(50, 50, 100, 100, 10);
 
 
 
-function createAnimalEntity(initPoint: Point) {
+function createAnimalEntity(initPoint: Point, color: string) {
     const animal = new Entity();
     animal.components.PositionComponent = new PositionComponent(initPoint.x, initPoint.y);
     animal.components.SizeComponent = new SizeComponent(2, 2);
     animal.components.VelocityComponent = new VelocityComponent(0, 0);
     animal.components.ColliderComponent = new ColliderComponent("animal", ['block']);
-    animal.components.ShapeComponent = new ShapeComponent('circle', 'black');
+    animal.components.ShapeComponent = new ShapeComponent('circle', color);
     animal.components.AnimalComponent = new AnimalComponent();
     animal.components.PathfindComponent = new PathfindComponent();
-    animal.components.LabelComponent = new LabelComponent(generateRandomName());
+    animal.components.LabelComponent = new LabelComponent(generateRandomJapaneseLastName(), color);
     return animal;
 }
 

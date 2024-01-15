@@ -25,9 +25,20 @@ export class RenderSystem extends System {
                 const mapCellGridSize = 10; // グリッドサイズ
                 const rectSize = 10; // 矩形のサイズ
 
+                for (let y = 0; y < map.grid.length; y++) {
+                    for (let x = 0; x < map.grid[y].length; x++) {
+                        if (map.grid[y][x] === 0) {
+                            const rectX = x * mapCellGridSize; // x 座標の計算
+                            const rectY = y * mapCellGridSize; // y 座標の計算
+                            this.ctx.fillStyle = "#E6E6E6";
+                            this.rect(rectX, rectY, mapCellGridSize, mapCellGridSize, true, true);
+                        }
+                    }
+                }
+
                 if ("gridDraw" == "gridDraw") {
                     // グリッド線の色や太さを設定
-                    this.ctx.strokeStyle = "#000"; // 線の色を黒に設定
+                    this.ctx.strokeStyle = "#CCCCCC"; // 線の色を黒に設定
                     this.ctx.lineWidth = 1; // 線の太さを1に設定
 
                     // 横方向のグリッド線を描画
@@ -43,16 +54,7 @@ export class RenderSystem extends System {
                     }
                 }
 
-                for (let y = 0; y < map.grid.length; y++) {
-                    for (let x = 0; x < map.grid[y].length; x++) {
-                        if (map.grid[y][x] === 0) {
-                            const rectX = x * mapCellGridSize; // x 座標の計算
-                            const rectY = y * mapCellGridSize; // y 座標の計算
-                            this.ctx.fillStyle = "#E6E6E6";
-                            this.rect(rectX, rectY, mapCellGridSize, mapCellGridSize, true, true);
-                        }
-                    }
-                }
+
             }
         });
 
@@ -83,7 +85,7 @@ export class RenderSystem extends System {
             if (position && size && label) {
                 const labelX = position.x + size.width / 2; // テキストのX座標を計算
                 const labelY = position.y - 5; // テキストのY座標を計算（適宜調整）
-                this.text(label.name, "black", labelX, labelY, "24px");
+                this.text(label.name, label.color, labelX, labelY, "20px");
             }
         });
     }
