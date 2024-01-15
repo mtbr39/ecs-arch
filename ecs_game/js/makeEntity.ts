@@ -27,8 +27,8 @@ export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
     // entities.push(...createMapBlock(mapComponent.grid));
 
     const animalInitPoint = MapGenerator.convertPointToCenterPoint(mapComponent.centers[0], 10);
-    const animalLength = 100;
-    for (let i = 0; i <= animalLength; i++) {
+    const animalLength = 20;
+    for (let i = 1; i <= animalLength; i++) {
         let color = "black";
         if (i == animalLength) color = "#FF3900";
         entities.push(createAnimalEntity(animalInitPoint, color));

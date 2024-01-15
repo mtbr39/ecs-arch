@@ -36,6 +36,8 @@ export class MovementSystem extends System {
         const currentPos = { x: position.x, y: position.y } as Point;
 
         if (pathfind.path.length === 0 || pathfind.achievement >= pathfind.path.length) {
+            pathfind.path = [];
+            pathfind.achievement = 0;
             velocity.speedX = 0;
             velocity.speedY = 0;
             return { speedX: 0, speedY: 0 };

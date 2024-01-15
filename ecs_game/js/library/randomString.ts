@@ -29,11 +29,11 @@ export function generateRandomJapaneseLastName() {
     let length;
     const randomProbability = Math.random();
     if (randomProbability < 0.10) {
-        length = 1; // 15%の確率で1文字
+        length = 1; // 低確率で1文字
     } else if (randomProbability < 0.20) {
-        length = 3; // 15%の確率で3文字
+        length = 3; // 低確率で3文字
     } else {
-        length = 2; // 70%の確率で2文字
+        length = 2; // 高確率で2文字
     }
 
     let lastName = '';

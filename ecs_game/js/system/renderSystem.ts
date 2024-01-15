@@ -83,7 +83,7 @@ export class RenderSystem extends System {
                 }
             }
             if (position && size && label) {
-                const labelX = position.x + size.width / 2; // テキストのX座標を計算
+                const labelX = position.x + size.width / 2 - 1.2; // テキストのX座標を計算
                 const labelY = position.y - 5; // テキストのY座標を計算（適宜調整）
                 this.text(label.name, label.color, labelX, labelY, "20px");
             }
