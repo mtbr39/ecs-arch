@@ -27,7 +27,7 @@ export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
     // entities.push(...createMapBlock(mapComponent.grid));
 
     const animalInitPoint = MapGenerator.convertPointToCenterPoint(mapComponent.centers[0], 10);
-    const animalLength = 20;
+    const animalLength = 50;
     for (let i = 1; i <= animalLength; i++) {
         let color = "black";
         if (i == animalLength) color = "#FF3900";
@@ -97,7 +97,7 @@ function createAnimalEntity(initPoint: Point, color: string) {
     animal.components.PositionComponent = new PositionComponent(initPoint.x, initPoint.y);
     animal.components.SizeComponent = new SizeComponent(2, 2);
     animal.components.VelocityComponent = new VelocityComponent(0, 0);
-    animal.components.ColliderComponent = new ColliderComponent("animal", ['block']);
+    // animal.components.ColliderComponent = new ColliderComponent("animal", ['block']);
     animal.components.ShapeComponent = new ShapeComponent('circle', color);
     animal.components.AnimalComponent = new AnimalComponent();
     animal.components.PathfindComponent = new PathfindComponent();
