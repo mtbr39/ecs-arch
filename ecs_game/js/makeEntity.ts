@@ -7,17 +7,17 @@ import { generateRandomName, generateRandomJapaneseLastName } from "./library/ra
 
 export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
 
-    entities.push(createPlayerEntity());
+    // entities.push(createPlayerEntity());
 
-    for (let i = 0; i < 5; i++) {
-        entities.push(createRandomPointEntity(canvas));
-    }
+    // for (let i = 0; i < 5; i++) {
+    //     entities.push(createRandomPointEntity(canvas));
+    // }
 
-    entities.push(
-        createButton(100, 0, 120, 40, "testButton", function () {
-            console.log("buttonAction");
-        })
-    );
+    // entities.push(
+    //     createButton(100, 0, 120, 40, "testButton", function () {
+    //         console.log("buttonAction");
+    //     })
+    // );
 
     // entities.push(...createSurroundingBlocks(100,100,150,150, 2));
 
