@@ -55,7 +55,7 @@ const init = () => {
     const animalSystem = new AnimalSystem(entities);
 
     const renderSystem = new RenderSystem(ctx, entities, scaler);
-    const uiRenderSystem = new UIRenderSystem(ctx, entities);
+    const uiRenderSystem = new UIRenderSystem(ctx, entities, scaler);
 
     const systemManager = new SystemManager();
     systemManager.addSystems([

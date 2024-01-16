@@ -3,7 +3,7 @@ import { System } from "./system";
 import { LabelComponent, MapComponent, PointComponent, PositionComponent, ShapeComponent, SizeComponent } from "../component/component";
 
 export class RenderSystem extends System {
-    private ctx: CanvasRenderingContext2D;
+    ctx: CanvasRenderingContext2D;
     entities: Entity[];
     scaler;
 
