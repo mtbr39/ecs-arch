@@ -7,12 +7,14 @@ type ComponentType<T> = new (...args: any[]) => T;
 
 export class InputSystem {
     private isPointerHold: boolean = false;
+    private isRightClick: boolean = false;
     constructor(private entities: Entity[], private scaler: any) {
         window.addEventListener("keydown", this.handleKeydown.bind(this));
         window.addEventListener("keyup", this.handleKeyup.bind(this));
         window.addEventListener("pointerdown", this.handlePointerDown.bind(this));
         window.addEventListener("pointermove", this.handlePointerMove.bind(this));
         window.addEventListener("pointerup", this.handlePointerUp.bind(this));
+        window.addEventListener('contextmenu', function(ev: Event) {ev.preventDefault(); });
     }
 
     findComponents(entity: Entity, componentTypes: ComponentType<Component>[]): Record<string, Component> {
@@ -103,7 +105,8 @@ export class InputSystem {
         const clientX = ev.clientX * window.devicePixelRatio;
         const clientY = ev.clientY * window.devicePixelRatio;
 
-        this.updateMapFromPointer(clientX, clientY);
+        this.isRightClick = ev.button === 2;
+        this.updateMapFromPointer(clientX, clientY, this.isRightClick);
     }
 
     handlePointerMove(ev: PointerEvent) {
@@ -111,7 +114,7 @@ export class InputSystem {
         const clientY = ev.clientY * window.devicePixelRatio;
 
         if (this.isPointerHold) {
-            this.updateMapFromPointer(clientX, clientY);
+            this.updateMapFromPointer(clientX, clientY, this.isRightClick);
         }
     }
 
@@ -121,7 +124,7 @@ export class InputSystem {
         const clientY = ev.clientY * window.devicePixelRatio;
     }
 
-    updateMapFromPointer(clientX: number, clientY: number) {
+    updateMapFromPointer(clientX: number, clientY: number, isRigthClick: boolean) {
         let map: MapComponent;
         this.entities.forEach((entity) => {
             const mapComponent = entity.components.MapComponent as MapComponent;
@@ -130,7 +133,7 @@ export class InputSystem {
                 const mapCellGridSize = 10;
                 const clickPoint = MapGenerator.convertCenterPointToPoint({ x: clientX, y: clientY }, mapCellGridSize, this.scaler.getScale());
 
-                map.grid[clickPoint.y][clickPoint.x] = 0;
+                map.grid[clickPoint.y][clickPoint.x] = isRigthClick ? 1 : 0;
                 return;
             }
         });

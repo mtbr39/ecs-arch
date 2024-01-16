@@ -41,7 +41,7 @@ export class AnimalSystem extends System {
                         if (randomProbability < 0.0) {
                             animal.state = "walk";
                             animal.stateTime = 60;
-                        } else if (randomProbability < 0.4) {
+                        } else if (randomProbability < 0.6) {
                             animal.state = "idle";
                             animal.stateTime = 60;
                         } else {

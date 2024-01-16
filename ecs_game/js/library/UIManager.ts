@@ -14,7 +14,7 @@ export class UIManager extends System {
     }
 
     handleClick(ev: PointerEvent) {
-        console.log("UIManager-debug");
+        // console.log("UIManager-debug");
         const clientX = ev.clientX * window.devicePixelRatio;
         const clientY = ev.clientY * window.devicePixelRatio;
         this.entities.forEach((entity) => {

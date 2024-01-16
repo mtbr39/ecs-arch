@@ -2,7 +2,7 @@ import { createButton } from "./library/UIManager";
 import { AnimalComponent, ColliderComponent, LabelComponent, MapComponent, PathfindComponent, PlayerComponent, PointComponent, PositionComponent, ShapeComponent, SizeComponent, VelocityComponent } from "./component/component";
 import { Entity } from "./entity";
 import { MapGenerator } from "./library/mapGenerator";
-import { convertPathToCenterPoints } from "./library/pathfind";
+import { convertPathToCenterPoints, getRandomEmptyPoint } from "./library/pathfind";
 import { generateRandomName, generateRandomJapaneseLastName } from "./library/randomString";
 
 export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
@@ -26,12 +26,18 @@ export function makeEntity(entities: Entity[], canvas: HTMLCanvasElement) {
     const mapComponent = mapEntity.components.MapComponent as MapComponent;
     // entities.push(...createMapBlock(mapComponent.grid));
 
-    const animalInitPoint = MapGenerator.convertPointToCenterPoint(mapComponent.centers[0], 10);
+    
     const animalLength = 50;
     for (let i = 1; i <= animalLength; i++) {
         let color = "black";
         if (i == animalLength) color = "#FF3900";
-        entities.push(createAnimalEntity(animalInitPoint, color));
+        const mapCellGridSize = 10;
+        let animalInitPoint = getRandomEmptyPoint(mapComponent.grid, mapCellGridSize);
+        if (animalInitPoint) {
+            entities.push(createAnimalEntity(animalInitPoint, color));
+        } else {
+            console.log("makeEntitiesにて、animalInitPointがnullです。");
+        }
     }
 
 }
